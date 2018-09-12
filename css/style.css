@@ -1,0 +1,97 @@
+.track {
+  height: 7px;
+  background: red;
+}
+
+.common {
+  width: 500px;
+  top: 50px;
+  position: relative;
+  margin-left: 100px;
+}
+
+.line_1 {
+  position: absolute;
+  transform: rotate(45deg);
+  width: 500px;
+  top: 180px;
+  left: 150px;
+  background: red;
+}
+
+.line_1_end {
+  transform: rotate(90deg);
+  position: absolute;
+  top: 405px;
+  left: 525px;
+  width: 100px;
+  background: red;
+}
+
+.line_2
+{
+  position: absolute;
+  transform: rotate(90deg);
+  width: 200px;
+  top: 102px;
+  left: 120px;
+  background: red;
+}
+
+.line_2_end
+{position:absolute;
+width:440px;transform: rotate(35deg);
+top:330px;left:175px;}
+
+.line_3 {
+  position: absolute;
+  width: 100px;
+  transform: rotate(30deg);
+  left: 490px;
+  top: 25px;
+}
+
+.stantion
+{width: 40px;
+height:40px;
+background: yellow;
+border-radius: 100%;position: absolute;top:-20px;}
+
+.balt
+{left:-10px;}
+
+.depo
+{left:60px;}
+
+.len
+{left:200px;}
+
+.vesyolaya_zhizn
+{left:470px;}
+
+.grustnaya_zhizn
+{left:563px;top:40px;}
+
+.strelna
+{left:200px;top:192px;}
+
+.petergof
+{left:309px;top:270px;}
+
+.lomonosov
+{left:400px;top:330px;}
+
+.popovo
+{left:505px; top:400px;}
+
+.gorgorod
+{left:555px; top:430px;}
+
+.myshkino
+{left:555px; top:350px;}
+
+.gatchina
+{left:485px; top:270px;}
+
+.taycy
+{left:365px; top:150px;}
