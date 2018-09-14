@@ -1,6 +1,6 @@
 var stations = [];
 var railways = [];
-var circle;
+
 
 class point {
   constructor(name, weight, ...line) {
@@ -8,8 +8,6 @@ class point {
     this.station = name;
     this.tracks = line;
     this.weight = weight;
-    this.opened = false;
-    // \задаем первоночальный "вес" узла("безконечность")
   }
 
   showMeWeight() {
@@ -110,108 +108,38 @@ function fireStarter(start) {
 function widthCompare(obj, comp, width) {
 
   if (obj.weight > comp + width) {
-    obj.weight = comp + width;
+    obj.weight = comp + width
+    return true;
   }
 }
 
-function shotestWay(start, end) {
+function check(arr, arr2) {
 
-  let step = 0;
-  let steps = []
-  let mark = 1;
-  let counter = 0;
-  let begin;
-  let waysStorage = copymaker(railways);
-  let previous;
-  while (counter < 12) {
-    begin = stations[fireStarter(start)];
-    steps.push(begin.station);
-    previous = steps[step];
-    begin.weight = 0;
-    for (let i = 0; i < stations.length; i++) {
-      for (let way in waysStorage) {
+  for (let point of arr) {
 
-        if (begin.station == waysStorage[way].point_a && begin != end) {
-          begin.opened = true;
-          console.log(steps + ' ' + step);
-          if (waysStorage[way].point_b != previous) {
-
-
-
-
-            begin = theStation(stations, waysStorage[way].point_b);
-            steps.push(begin.station);
-            previous = steps[step];
-            step++;
-            widthCompare(begin, waysStorage[way].distation, theStation(stations, waysStorage[way].point_a).weight);
-            waysStorage[way].index.splice(0, 1)
-            if (waysStorage[way].index.length < 2) {
-              waysStorage.splice(way, 1);
-            }
-            way = 0;
-            if (mark != 3) {
-              mark = 1;
-            }
-
-            if (waysStorage.length == 0) {
-              return null;
-            }
-          }
-        }
-
-        if (begin.station == waysStorage[way].point_b && begin != end) {
-          begin.opened = true;
-
-          console.log(steps + ' ' + step);
-          if (waysStorage[way].point_a != previous) {
-
-            begin = theStation(stations, waysStorage[way].point_a);
-            steps.push(begin.station);
-            previous = steps[step];
-            step++;
-            widthCompare(begin, waysStorage[way].distation, theStation(stations, waysStorage[way].point_b).weight);
-            waysStorage[way].index.splice(0, 1)
-            if (waysStorage[way].index.length < 2) {
-              waysStorage.splice(way, 1);
-            }
-            way = 0;
-            if (mark != 3) {
-              mark = 1;
-            }
-
-            if (waysStorage.length == 0) {
-              return null;
-            }
-          }
-        }
-
-        if (begin != end && mark != 3) {
-          mark = 0;
-        }
-
-
-
-        for (let i = 0; i < waysStorage.length; i++) {
-          if (waysStorage[i].point_a == stations[fireStarter(start)].station || waysStorage[i].point_b == stations[fireStarter(start)].station) {
-            mark = 0;
-          }
-
-          for (let st of stations) {
-            if (st.opened == true && (mark == 1 || mark == 3) && (st.station == waysStorage[i].point_a || st.station == waysStorage[i].point_b)) {
-              mark = 3;
-
-              begin = st;
-            }
-          }
-        }
+    for (let way of arr2) {
+      if (point.station == way.point_a && widthCompare(theStation(stations, way.point_b), way.distation, theStation(stations, way.point_a).weight) ||
+        (point.station == way.point_b && widthCompare(theStation(stations, way.point_a), way.distation, theStation(stations, way.point_b).weight))) {
+        return true;
       }
     }
-    counter++;
   }
-  console.log(waysStorage);
 }
 
-shotestWay(baltiyskay, petergof);
+function shotestWay(start) {
+
+
+  let begin;
+  let waysStorage = copymaker(railways);
+  let chk = true;
+  begin = stations[fireStarter(start)];
+  begin.weight = 0;
+  while (chk) {
+    chk = check(stations, waysStorage);
+  }
+}
+
+shotestWay(depo);
 
 for (let it of stations) {
   it.showMeWeight()
